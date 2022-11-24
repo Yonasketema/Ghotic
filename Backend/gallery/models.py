@@ -18,4 +18,4 @@ class Product(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     category = models.ForeignKey(
         ProductCategory, on_delete=models.PROTECT)
-    = models.TextField()
+    description = models.TextField()
