@@ -12,6 +12,9 @@ class Artist(models.Model):
 class ProductCategory(models.Model):
     title = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
