@@ -9,6 +9,9 @@ class Artist(models.Model):
     username = models.CharField(max_length=255)
     description = models.TextField()
 
+    def __str__(self) -> str:
+        return f'{self.first_name} {self.last_name}'
+
 
 class ProductCategory(models.Model):
     title = models.CharField(max_length=255)
@@ -23,3 +26,6 @@ class Product(models.Model):
     category = models.ForeignKey(
         ProductCategory, on_delete=models.PROTECT)
     description = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
