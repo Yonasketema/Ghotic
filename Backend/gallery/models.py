@@ -13,6 +13,12 @@ class Artist(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
+class ArtistImage(models.Model):
+    artist = models.ForeignKey(
+        Artist, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='artist/images')
+
+
 class ProductCategory(models.Model):
     title = models.CharField(max_length=255)
 
@@ -29,3 +35,9 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class ProductImage(models.Model):
+    artist = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='product/images')
