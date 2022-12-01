@@ -3,9 +3,14 @@ from . import models
 # Register your models h@ere.
 
 
+class ArtistImageInline(admin.TabularInline):
+    model = models.ArtistImage
+
+
 @admin.register(models.Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ArtistImageInline]
+    list_display = ['first_name', 'last_name', 'username']
 
 
 @admin.register(models.ProductCategory)
@@ -13,6 +18,11 @@ class ProductCategoryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.ProductProduct)
+class ProductImageInline(admin.TabularInline):
+    model = models.ProductImage
+
+
+@admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ProductImageInline]
+    list_display = ['title', 'artist']
