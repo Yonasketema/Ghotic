@@ -1,34 +1,35 @@
 from rest_framework import serializers
 
-from gallery.models import Artist, ArtistImage, Product, ProductImage
-
-
-class ProductImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ProductImage
-        fields = ['id', 'image']
-
-
-class ArtistImageSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = ArtistImage
-        fields = ['id', 'image']
+from gallery.models import Artist, Product, ProductCategory
 
 
 class ArtistSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True, read_only=True)
+
+    def create(self, validated_data):
+        user_id = self.context['user_id']
+        return Artist.objects.create(user_id=user_id, **validated_data)
 
     class Meta:
         model = Artist
-        fields = ['id', 'first_name', 'last_name', 'description', 'images']
+        fields = ['id', 'first_name', 'last_name', 'username',
+                  'description', 'profile_pic']
+
+
+class ProductCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        fields = ['id', 'title']
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    artist = ArtistSerializer()
-    category = serializers.StringRelatedField()
-    images = ProductImageSerializer(many=True, read_only=True)
+    artist = ArtistSerializer(read_only=True)
+
+    def create(self, validated_data):
+        user_id = self.context['user_id']
+        (artist, created) = Artist.objects.get_or_create(
+            user_id=user_id)  # req.user.id
+
+        return Product.objects.create(artist_id=artist.id, **validated_data)
 
     class Meta:
         model = Product
