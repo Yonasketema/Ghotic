@@ -26,7 +26,7 @@ class ProductViewSet(ModelViewSet):
         return [IsAuthenticated()]
 
     def get_serializer_context(self):
-        return {'user_id': self.request.user.id}
+        return {'user_id': self.request.user.id, 'request': self.request}
 
 
 class ArtistViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, GenericViewSet):
@@ -40,7 +40,7 @@ class ArtistViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, Gene
         return [IsAuthenticated()]
 
     def get_serializer_context(self):
-        return {'user_id': self.request.user.id}
+        return {'user_id': self.request.user.id, 'request': self.request}
 
     @action(detail=False, methods=['GET', 'PUT'])
     def me(self, request):
