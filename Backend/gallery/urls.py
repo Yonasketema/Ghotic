@@ -4,10 +4,10 @@ from . import views
 
 routers = SimpleRouter()
 routers.register('products', views.ProductViewSet)
-
-
-# urlpatterns =
+routers.register('artists', views.ArtistViewSet)
 
 urlpatterns = [
-    path('artist/<artist_name>/', views.artist)
+    path('artist/<artist_name>/', views.artist),
+    path('like', views.product_like)
+
 ] + routers.urls

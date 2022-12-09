@@ -12,7 +12,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = ['id', 'first_name', 'last_name', 'username',
-                  'description', 'profile_pic']
+                  'description', 'profile_pic',]
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):
@@ -23,6 +23,10 @@ class ProductCategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer(read_only=True)
+    likes = serializers.SerializerMethodField(method_name='like_count')
+
+    def like_count(self, product: Product):
+        return product.likes.count()
 
     def create(self, validated_data):
         user_id = self.context['user_id']
@@ -33,4 +37,5 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'artist', 'category', 'description', 'images']
+        fields = ['id', 'title', 'artist', 'category',
+                  'description', 'images', 'likes']
