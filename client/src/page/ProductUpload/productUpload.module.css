@@ -1,0 +1,90 @@
+.productupload_container {
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.productupload_container h1 {
+  margin-bottom: 3rem;
+}
+
+.upload_nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 3rem;
+}
+
+.upload_nav button {
+  padding: 0.6em;
+  font-size: medium;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+}
+.btn_upload {
+  background-color: #bbd915;
+  color: #333;
+}
+.img_container {
+  margin-top: 1rem;
+  width: 60rem;
+  height: 40rem;
+  border: 2px dashed #333;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_container img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+.img_delete_btn {
+  position: absolute;
+  font-size: larger;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0.7em;
+  border: none;
+  background-color: #2222;
+  color: #111;
+  margin: 1rem;
+}
+
+.upload_text {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.upload_text input {
+  width: 100%;
+
+  border: none;
+  border-radius: 5px;
+  padding: 0.7em;
+  color: #b2b7c2;
+
+  z-index: 1000;
+
+  background-color: #3333;
+
+  margin-bottom: 1rem;
+}
+
+.input_title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.upload_text input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
