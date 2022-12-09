@@ -12,7 +12,7 @@ class Artist(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
-        upload_to='artist-profile/images')
+        upload_to='artist-profile/images', default=None, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
@@ -32,6 +32,8 @@ class Product(models.Model):
         ProductCategory, on_delete=models.PROTECT)
     description = models.TextField()
     images = models.ImageField(upload_to='product/images')
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='product_like', default=None, blank=True)
 
     def __str__(self) -> str:
         return self.title
