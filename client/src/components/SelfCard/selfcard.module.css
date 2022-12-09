@@ -1,0 +1,49 @@
+
+.selfcard_container {
+	width: 23rem; 
+	position: relative;
+
+}
+
+.selfcard_container:hover div{
+	opacity: 1;
+}
+
+ 
+.selfcard_container img {
+	width: 100%;
+	border-radius: 5px;
+
+}
+
+.selfcard_status{
+
+   position: absolute;
+   width: inherit;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   bottom: 0;
+   padding: 1rem;
+/*   background-color: #2222;*/
+   background-image: linear-gradient(to top,#191919 ,transparent);
+   opacity:0;
+   transition: all .3s;
+   color: #fff;
+	font-size: larger;
+ 
+}
+
+
+
+.selfcard_status button{
+	 background-color: #E1E4EB;
+	 padding: .7rem;
+	 border: none;
+	 border-radius: 12px;
+	 z-index: 100;
+}
+.selfcard_status i{
+	 color: #222;
+	 font-size: 1.2rem;
+}
