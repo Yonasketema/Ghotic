@@ -1,0 +1,24 @@
+.profile_container {
+  font-size: 1.4em;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:2em;
+  padding: 3em ;
+}
+
+.artist_profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .4em;
+} 
+.artist_profile h2{
+  text-transform: capitalize;
+} 
+.profile_container img {
+  border-radius: 50%;
+  width: 7em;
+  height: 7em;
+}
