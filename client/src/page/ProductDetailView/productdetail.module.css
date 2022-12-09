@@ -1,0 +1,80 @@
+.productdetail_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.artistprofile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  margin-bottom: 3rem;
+}
+.profile {
+  color: #fff;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile p {
+  color: #9999;
+}
+.profile img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.product_main p {
+  color: #fff;
+}
+.artistprofile button {
+  padding: 0.7em;
+  border-radius: 7px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  border: 1px solid red;
+  background-color: #f3f3f4;
+  color: red;
+}
+.artistprofile i {
+  font-size: 1.5em;
+}
+
+.product_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product_main p {
+  width: 45%;
+  font-size: 1.7rem;
+}
+
+.product_image {
+  width: 70%;
+  border-radius: 5px;
+  /*   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
+
+  margin-bottom: 3rem;
+}
+
+.more_nav {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.more_nav a {
+  color: #bbd915;
+  text-decoration: none;
+}
