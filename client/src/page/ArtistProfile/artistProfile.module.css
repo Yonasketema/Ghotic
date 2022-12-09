@@ -1,0 +1,20 @@
+.artistprofile_container {
+  padding: 4.7rem;
+}
+
+.profile_subnav {
+  padding: 1.7rem 0;
+  margin-bottom: 4rem;
+  border-bottom: 3px solid #3333;
+}
+
+.profile_subnav ul {
+  color: #fff;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.profile_subnav ul li span {
+  color: #777;
+}
