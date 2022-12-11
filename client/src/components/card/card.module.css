@@ -8,6 +8,7 @@
   flex-direction: column;
   max-height: 21rem;
   background-color: #2222;
+  cursor: auto;
 
   /* background-color: black;*/
 }

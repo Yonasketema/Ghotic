@@ -1,9 +1,11 @@
 import React from "react";
 
 import Classes from "./card.module.css";
+import { Link } from 'react-router-dom';
 
 function Card() {
   return (
+    <Link to="/productdetailview">
     <div className={Classes.card_container}>
       <div className={Classes.img_container}>
         <img src="https://picsum.photos/250/210" />
@@ -15,10 +17,14 @@ function Card() {
 
       <div className={Classes.pro_pic_container}>
         <img src="https://picsum.photos/323/223" />
-
+       
+       <Link to="artistprofile">
         <p>yonask</p>
+        </Link>
       </div>
     </div>
+
+    </Link>
   );
 }
 
