@@ -1,0 +1,2 @@
+# Ghotic
+🖌️  ethiopian arts
