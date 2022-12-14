@@ -1,6 +1,6 @@
 import React from "react";
 import Classes from "./header.module.css";
-import {Button} from '../lib'
+import {Button ,FlexBox} from '../lib'
 import styled from "styled-components";
 
 
@@ -18,7 +18,7 @@ function Header() {
       </nav>
 
       <div>
-        {true ? (
+        {false ? (
           <div className={Classes.profile_dropdown}>
             <div className={Classes.profile_img}>
               <img
@@ -40,10 +40,14 @@ function Header() {
 
           </div>
         ) : (
-          <div>
-           <Button primary  >Sign up</Button>
+
+          <FlexBox>
+            <Button primary  >Sign up</Button>
            <Button primary  >Login</Button>
-          </div>
+          </FlexBox> 
+
+           
+          
         )}
       </div>
     </header>
