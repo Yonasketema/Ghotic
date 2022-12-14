@@ -24,7 +24,12 @@ function Header() {
               <img
                 src="https://picsum.photos/323/223"
               />
-              
+               <div className={Classes.profile_subnav}>
+                <Link to='/artistprofile'><p>Profile</p> </Link>
+                <p>Edit Profile</p>
+                <p><i className="fa fa-heart" aria-hidden="true"></i>  My Like</p>
+                <p>Sign out</p>
+              </div>
 
             </div>
 
