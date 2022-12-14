@@ -1,90 +1,48 @@
-
 import React from "react";
-
 import Classes from "./header.module.css";
-import { Link } from 'react-router-dom';
+import {Button} from '../lib'
+import styled from "styled-components";
+
+
+import { Link } from "react-router-dom";
+
 
 function Header() {
   return (
-     <header
-style={{
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "1rem",
-  gap: "1rem",
-}}
->
-<nav
-  style={{
-    display: "flex",
-    padding: "1rem",
-    gap: "1rem",
-  }}
->
-  <div>Gothic</div>
+    <header className={Classes.header_container}>
+     <nav className={Classes.header_nav}>
+        <div>Gothic</div>
 
-  <div>Home</div>
-  <div>About</div>
-</nav>
+        <div>Home</div>
+        <div>About</div>
+      </nav>
 
-<div>
-  {/*    <img  style={{
-      width:"3rem",
-      height:"3rem",
-      borderRadius:"50%",
-   }} src="https://picsum.photos/323/223"/>
-*/}
+      <div>
+        {true ? (
+          <div className={Classes.profile_dropdown}>
+            <div className={Classes.profile_img}>
+              <img
+                src="https://picsum.photos/323/223"
+              />
+              
 
-  <button
-    style={{
-      padding: ".5rem 1.7rem",
-      fontSize: "1rem",
-      fontWeight: "700",
-      backgroundColor: "#BBD915",
-      border: "none",
-      color: "#FFF",
-      boxShadow: "rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset",
-    }}
-  >
-    Login
-  </button>
-  <button
-    style={{
-      padding: ".5rem 1.7rem",
-      fontSize: "1rem",
-      fontWeight: "700",
-      backgroundColor: "#BBD915",
-      border: "none",
-      color: "#FFF",
-      marginLeft: "1rem",
-      boxShadow: "rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset",
-    }}
-  >
-    Signup
-  </button>
-</div>
-</header>
+            </div>
+
+            <Link to="/upload">
+               <Button primary rounded >Upload</Button>
+            </Link>
+            
+
+          </div>
+        ) : (
+          <div>
+           <Button primary  >Sign up</Button>
+           <Button primary  >Login</Button>
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
 
 export default Header;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
