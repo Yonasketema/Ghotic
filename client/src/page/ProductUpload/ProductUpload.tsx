@@ -1,7 +1,10 @@
+import axios, { AxiosResponse } from "axios";
 import React from "react";
 import Classes from "./productUpload.module.css";
 
-function ProductUpload() {
+function ProductUpload(props: { token?: string }) {
+  console.log("++++", props.token);
+
   const [img, setImg] = React.useState("");
 
   function imageHandler(e: any): void {
@@ -15,59 +18,91 @@ function ProductUpload() {
     reader.readAsDataURL(e.target.files[0]);
   }
 
+  function handleSubmit(event: any) {
+    event.preventDefault();
+
+    const { title, description, images } = event.target.elements;
+
+    const formData = new FormData();
+
+    formData.append("title", title.value);
+    formData.append("description", `${description.value}`);
+
+    formData.append("category", "1");
+    formData.append("images", images.files[0]);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_PRODUCTS}`,
+
+        formData,
+        {
+          headers: {
+            Authorization: `JWT ${props.token}`,
+          },
+        }
+      )
+      .then((res) => res.data);
+  }
+
   return (
     <div className={Classes.productupload_container}>
-      <div className={Classes.upload_nav}>
-        <button className={Classes.btn_cancel}>cancel</button>
+      <form onSubmit={handleSubmit} style={{ width: "80%", margin: "0 auto" }}>
+        <div className={Classes.upload_nav}>
+          <button type="submit" className={Classes.btn_cancel}>
+            cancel
+          </button>
 
-        <button className={Classes.btn_upload}>Upload</button>
-      </div>
-      <h1 className="heading">Add your Image</h1>
-
-      <div className={Classes.upload_text}>
-        {/*<label htmlFor="weekday-3" placeholder='give'>title</label>*/}
-        <input
-          type="text"
-          placeholder="Give me a name"
-          className={Classes.input_title}
-        />
-        {/*<label htmlFor="weekday-3" >dis</label>*/}
-        <input
-          placeholder="Write what went into this shot, and anything else you’d like to mention"
-          type="text"
-          className={Classes.input_what}
-        />
-      </div>
-
-      <label htmlFor="img-input">
-        <div className={Classes.img_container}>
-          {img && (
-            <button
-              onClick={() => {
-                setImg("");
-                window.location.reload();
-              }}
-              className={Classes.img_delete_btn}
-            >
-              <i className="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          )}
-          {img ? (
-            <img src={img} alt="" id="img" className="img" />
-          ) : (
-            <p>1600x1200 or higher recommended. Max 10MB </p>
-          )}
+          <button className={Classes.btn_upload}>Upload</button>
         </div>
-      </label>
+        <h1 className="heading">Add your Image</h1>
 
-      <input
-        style={{ display: "none" }}
-        type="file"
-        accept="image/*"
-        name="image-upload"
-        id="img-input"
-        onChange={imageHandler}
-      />
+        <div className={Classes.upload_text}>
+          <input
+            type="text"
+            placeholder="Give me a name"
+            id="title"
+            className={Classes.input_title}
+          />
+
+          <input
+            placeholder="Write what went into this shot, and anything else you’d like to mention"
+            type="text"
+            id="description"
+            className={Classes.input_what}
+          />
+        </div>
+
+        <label htmlFor="images">
+          <div className={Classes.img_container}>
+            {img && (
+              <button
+                onClick={() => {
+                  setImg("");
+                  window.location.reload();
+                }}
+                className={Classes.img_delete_btn}
+              >
+                <i className="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            )}
+            {img ? (
+              <img src={img} alt="" id="img" className="img" />
+            ) : (
+              <p>1600x1200 or higher recommended. Max 10MB </p>
+            )}
+          </div>
+        </label>
+
+        <input
+          style={{ display: "none" }}
+          type="file"
+          accept="image/*"
+          name="image-upload"
+          id="images"
+          onChange={imageHandler}
+        />
+      </form>
     </div>
   );
 }

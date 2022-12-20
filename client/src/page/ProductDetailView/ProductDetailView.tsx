@@ -2,36 +2,60 @@ import React from "react";
 import Classes from "./productdetail.module.css";
 import Profile from "./../../components/profile/Profile";
 import SelfCard from "./../../components/SelfCard/SelfCard";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+
+import { useParams } from "react-router-dom";
+
+type Product = {
+  id: number;
+  title: string;
+  artist: {
+    id: number;
+    first_name: string;
+    last_name: number;
+    username: string;
+    description: string;
+    profile_pic: string | null;
+  };
+  category: number;
+  description: string;
+  images: string;
+  likes: number;
+};
 
 function ProductDetailview() {
+  const { id } = useParams();
+
+  const { isLoading, error, data } = useQuery<Product>(["product", id], () =>
+    axios.get(`${process.env.REACT_APP_PRODUCTS}/${id}`).then((res) => res.data)
+  );
+
+  //////////////////// isLoading ....isError
   return (
     <div className={Classes.productdetail_container}>
       <div className={Classes.artistprofile}>
         {/*<Profile/>*/}
         <div className={Classes.profile}>
-          <img alt="a" src="https://picsum.photos/1280/720 " />
+          <img
+            alt="a"
+            src={data?.artist.profile_pic ?? "https://picsum.photos/323/223"}
+          />
 
           <div>
-            <h4>Social Media Marketing Agency Website Template Design</h4>
-            <p>Artist</p>
+            <h4>{data?.title}</h4>
+            <p>{data?.artist.username}</p>
           </div>
         </div>
         <button>
-          <i className="fa-regular fa-heart"></i> <small>121</small>
+          <i className="fa-regular fa-heart"></i> <small>{data?.likes}</small>
         </button>
       </div>
 
       <main className={Classes.product_main}>
-        <img
-          className={Classes.product_image}
-          src="https://picsum.photos/1280/720 "
-        />
+        <img className={Classes.product_image} src={data?.images} />
 
-        <p>
-          Hi, friends! I continue working on a design concept for Web Header -
-          Landing Page. Take a look at the Web design of this awesome service!
-          Hope you enjoy it!
-        </p>
+        <p>{data?.description}</p>
       </main>
 
       <section className={Classes.more}>

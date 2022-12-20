@@ -67,6 +67,11 @@
   margin-bottom: 3rem;
 }
 
+/* top space .... */
+.more {
+  margin-top: 7rem;
+}
+
 .more_nav {
   display: flex;
   justify-content: space-between;
