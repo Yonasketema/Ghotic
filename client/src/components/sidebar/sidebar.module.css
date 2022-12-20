@@ -1,53 +1,45 @@
-ul{
-	list-style: none;
+ul {
+  list-style: none;
 }
- li {
- 	margin-bottom: 1rem;
- }
-.sidebar_container ul{
-    justify-content: center;
-    display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-
-
+li {
+  margin-bottom: 1rem;
+}
+.sidebar_container ul {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.sidebar_container ul h4{
-    color: #fff;
-    margin: 1rem;
+.sidebar_container ul h4 {
+  color: #fff;
+  margin: 1rem;
 }
 
-
-.sidebar_container{
-	height: 100vh; 
-	padding: 1rem;
-	width: 16rem;
-    border-radius: 12px;
-	background-color: #2222;
-     
-
-
-
-
+.sidebar_container {
+  height: 100vh;
+  padding: 1rem;
+  width: 16rem;
+  border-radius: 12px;
+  background-color: #2222;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   display: block;
   margin: 0.2em;
   cursor: pointer;
   padding: 0.2em;
-  font-family: 'Arial'
+  font-family: "Arial";
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
 
-input[type=checkbox] + label:before {
+input[type="checkbox"] + label:before {
   content: "\2714";
-   
-  border: 0.1em solid #BBD915;
+
+  border: 0.1em solid #bbd915;
   border-radius: 0.2em;
   display: inline-block;
   width: 1em;
@@ -57,23 +49,21 @@ input[type=checkbox] + label:before {
   margin-right: 0.2em;
   vertical-align: bottom;
   color: transparent;
- 
 }
 
- 
-input[type=checkbox]:checked + label:before {
-  background-color: #BBD915;
-  border-color: #BBD915;
+input[type="checkbox"]:checked + label:before {
+  background-color: #bbd915;
+  border-color: #bbd915;
   color: #fff;
 }
 
-input[type=checkbox]:disabled + label:before {
+input[type="checkbox"]:disabled + label:before {
   transform: scale(1);
-  border-color: #BBD915;
+  border-color: #bbd915;
 }
 
-input[type=checkbox]:checked:disabled + label:before {
+input[type="checkbox"]:checked:disabled + label:before {
   transform: scale(1);
-  background-color: #BBD915;
-  border-color: #BBD915;
+  background-color: #bbd915;
+  border-color: #bbd915;
 }

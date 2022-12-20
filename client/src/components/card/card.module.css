@@ -1,6 +1,6 @@
 .card_container {
   padding: 1rem;
-  width: 15rem;
+  width: 21rem;
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -26,7 +26,18 @@ img {
   margin-bottom: 0.3rem;
 }
 .status_container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   margin: 0.5rem 0 0.7rem 0;
+}
+
+.status_container h4 {
+  width: 80%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .pro_pic_container {
   display: flex;
