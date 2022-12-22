@@ -1,5 +1,5 @@
 .card_container {
-  padding: 1rem;
+/*  padding: 1rem;*/
   width: 21rem;
   border-radius: 12px;
   display: flex;
@@ -9,6 +9,8 @@
   max-height: 21rem;
   background-color: #2222;
   cursor: auto;
+  max-height:35rem ;
+  margin-bottom: 1rem;
 
   /* background-color: black;*/
 }
@@ -21,11 +23,15 @@ img {
 
 .img_container img {
   width: 100%;
+  display: inline-block;
 
-  border-radius: 12px;
+/*  border-radius: 12px;*/
+  border-radius: 12px 12px 0px 0px;
   margin-bottom: 0.3rem;
 }
 .status_container {
+  padding: 0 1rem;
+
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -43,9 +49,12 @@ img {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: .7rem;
+
 }
 .pro_pic_container img {
   width: 1.7rem;
   height: 1.7rem;
   border-radius: 50%;
 }
+ 

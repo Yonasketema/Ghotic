@@ -31,7 +31,7 @@ function Card({ Product }: { Product: Product }) {
           <h4>{Product.title}</h4>
 
           <i className="fa fa-heart" aria-hidden="true">
-            <small>{Product.likes}</small>
+            <small style={{marginLeft:".3rem"}}>{Product.likes}</small>
           </i>
         </div>
 
