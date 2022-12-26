@@ -58,7 +58,7 @@ def artist(request, artist_name):
     product = Product.objects.filter(artist__username=artist_name)
     if not product:
         return Response("no artist with is name", status.HTTP_404_NOT_FOUND)
-    serializer = ProductSerializer(product, many=True)
+    serializer = ProductSerializer(product, many=True,context={'request': request})
     return Response(serializer.data)
 
 
@@ -66,10 +66,12 @@ def artist(request, artist_name):
 @permission_classes([IsAuthenticated])
 def product_like(request):
     product = get_object_or_404(Product, id=request.data['product_id'])
+    artist = get_object_or_404(Artist,
+            user_id=request.user.id)
 
-    if product.likes.filter(id=request.user.id).exists():
-        product.likes.remove(request.user)
+    if product.likes.filter(id=artist.id).exists():
+        product.likes.remove(artist)
     else:
-        product.likes.add(request.user)
+        product.likes.add(artist)
 
     return Response(ProductSerializer(product, context={'request': request}).data,)
