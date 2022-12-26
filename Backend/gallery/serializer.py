@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from gallery.models import Artist, Product, ProductCategory
@@ -12,7 +13,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = ['id', 'first_name', 'last_name', 'username',
-                  'description', 'profile_pic',]
+                  'description', 'profile_pic']
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):
@@ -23,19 +24,19 @@ class ProductCategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     artist = ArtistSerializer(read_only=True)
-    likes = serializers.SerializerMethodField(method_name='like_count')
+    likes_number = serializers.SerializerMethodField(method_name='like_count')
 
     def like_count(self, product: Product):
         return product.likes.count()
 
     def create(self, validated_data):
         user_id = self.context['user_id']
-        (artist, created) = Artist.objects.get_or_create(
-            user_id=user_id)  # req.user.id
+        artist = get_object_or_404(Artist,
+                                   user_id=user_id)  # req.user.id
 
         return Product.objects.create(artist_id=artist.id, **validated_data)
 
     class Meta:
         model = Product
         fields = ['id', 'title', 'artist', 'category',
-                  'description', 'images', 'likes']
+                  'description', 'images', 'likes_number', 'likes']
