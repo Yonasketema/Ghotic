@@ -1,12 +1,21 @@
 import React from "react";
 import Classes from "./selfcard.module.css";
 
-function SelfCard() {
+
+type selfProduct = {
+  id: number;
+  title: string;
+  images: string;
+  // onPressLove:any
+};
+
+
+function SelfCard({id,title,images}:selfProduct) {
   return (
     <div className={Classes.selfcard_container}>
-      <img src="https://picsum.photos/390/350" />
+      <img src={images}/>
       <div className={Classes.selfcard_status}>
-        <p>title of the year</p>
+        <p>{title}</p>
         <button>
           <i className="fa fa-heart" aria-hidden="true"></i>
         </button>
