@@ -51,14 +51,14 @@ function App() {
     <>
       <Header User={data} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/artistprofile" element={<ArtistProfile />} />
+        <Route path="/" element={<Home token={jwttokens.access}/>} />
+        <Route path="/:artist_username" element={<ArtistProfile />} />
         <Route
           path="/upload"
           element={<ProductUpload token={jwttokens.access} />}
         />
         <Route path="/productdetailview/:id" element={<ProductDetailView />} />
-        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/editprofile" element={<EditProfile token={jwttokens.access}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Login />} />
