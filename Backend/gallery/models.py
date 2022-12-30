@@ -7,7 +7,7 @@ from django.conf import settings
 class Artist(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    username = models.CharField(max_length=255, unique=True)
+    username = models.CharField(max_length=255, unique=True,null=True)
     description = models.TextField()
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -27,13 +27,13 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE,related_name="productbyartist")
     category = models.ForeignKey(
         ProductCategory, on_delete=models.PROTECT)
     description = models.TextField()
     images = models.ImageField(upload_to='product/images')
     likes = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name='product_like', default=None, blank=True)
+        Artist, related_name='product_like', default=None, blank=True)
 
     def __str__(self) -> str:
         return self.title
