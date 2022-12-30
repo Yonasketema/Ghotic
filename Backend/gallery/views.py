@@ -91,5 +91,14 @@ def profile_pic(request):
     return Response(serializer.data) 
 
     
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_likes_products(request):
+    artist = get_object_or_404(Artist,
+            user_id=request.user.id)
+    queryset=artist.product_like.all()
+    serializer = ProductSerializer(queryset, many=True)
+    
+    return Response(serializer.data)
 
   
