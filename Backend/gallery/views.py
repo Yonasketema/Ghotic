@@ -75,3 +75,21 @@ def product_like(request):
         product.likes.add(artist)
 
     return Response(ProductSerializer(product, context={'request': request}).data,)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def profile_pic(request):
+    artist = get_object_or_404(Artist,
+            user_id=request.user.id)
+
+    artist.profile_pic = request.data["profile_pic"]
+    artist.save()
+    
+    serializer = ArtistSerializer(artist, context={'request': request})
+    
+    return Response(serializer.data) 
+
+    
+
+  
