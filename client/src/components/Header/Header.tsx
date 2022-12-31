@@ -40,7 +40,7 @@ function Header({ User }: HeaderProp) {
               <img src="https://picsum.photos/323/223" />
               <small>{User?.username}</small>
               <div className={Classes.profile_subnav}>
-                <Link to="/artistprofile">
+                <Link to={`/${User?.username}`}>
                   <p>Profile</p>{" "}
                 </Link>
                 <Link to="/editprofile">
