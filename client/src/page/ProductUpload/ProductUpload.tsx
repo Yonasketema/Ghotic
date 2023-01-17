@@ -49,12 +49,13 @@ function ProductUpload(props: { token?: string }) {
     <div className={Classes.productupload_container}>
       <form onSubmit={handleSubmit} style={{ width: "80%", margin: "0 auto" }}>
         <div className={Classes.upload_nav}>
-          <button type="submit" className={Classes.btn_cancel}>
+          <button type="button" className={Classes.btn_cancel}>
             cancel
           </button>
 
-          <button className={Classes.btn_upload}>Upload</button>
+         {true ?  <button   className={Classes.btn_upload}>Upload</button> : <button type="button" className={Classes.btn_upload}>Edit Profile</button>}
         </div>
+        {true && <p>put your username fisrt</p>}
         <h1 className="heading">Add your Image</h1>
 
         <div className={Classes.upload_text}>
