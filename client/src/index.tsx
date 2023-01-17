@@ -18,15 +18,10 @@ const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-
-    
       <Router>
         <StyledEngineProvider injectFirst>
-
-
-        <App />
-    </StyledEngineProvider>
-
+          <App />
+        </StyledEngineProvider>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
