@@ -5,6 +5,9 @@ import Screen from "./../components/Screen";
 import { useQuery ,useMutation,useQueryClient} from "@tanstack/react-query";
 import axios from "axios";
 
+import Masonry from '@mui/lab/Masonry';
+ 
+
 type Product = {
   id: number;
   title: string;
@@ -52,32 +55,30 @@ const HomePage = (props: { token?: string }) => {
         style={{
           display: "flex",
           padding: "1rem",
-          justifyContent: "space-between",
           gap: "1rem",
+          
         }}
       >
         <SideBar />
-        <div>
-          {/*<Screen/>*/}
+        
 
-          <div
-            className="App"
-            style={{
-               
-              display: "Grid",
-               gridTemplateColumns: "repeat(3, 1fr)",
-               gridAutoFlow:"dense",
-              justifyContent: "space-between",
-              width: "100%",
-              gap: "1rem",
-            }}
-          >
-            {data?.map((product , i) => (
+        <div style={{
+          flex:"2"
+        }}>
+          {/*<Screen/>*/}
+        
+        <Masonry columns={3} spacing={3}>
+                  {data?.map((product , i) => (
               <Card key={product.id} Product={product} onPressLove={handleLike} />
-            ))}
+            )) ?? <div>hello</div>}
+                  
+           </Masonry>
+
           </div>
-          <div style={{ height: "1rem" }}></div>
-        </div>
+
+
+          
+     
       </div>
     </>
   );
