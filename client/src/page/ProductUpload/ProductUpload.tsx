@@ -53,7 +53,13 @@ function ProductUpload(props: { token?: string }) {
             cancel
           </button>
 
-         {true ?  <button   className={Classes.btn_upload}>Upload</button> : <button type="button" className={Classes.btn_upload}>Edit Profile</button>}
+          {true ? (
+            <button className={Classes.btn_upload}>Upload</button>
+          ) : (
+            <button type="button" className={Classes.btn_upload}>
+              Edit Profile
+            </button>
+          )}
         </div>
         {true && <p>put your username fisrt</p>}
         <h1 className="heading">Add your Image</h1>
