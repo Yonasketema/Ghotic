@@ -22,7 +22,7 @@ type Product = {
   description: string;
   images: string;
   likes: number[];
-  likes_number:number;
+  likes_number: number;
 };
 
 function ProductDetailview() {
@@ -49,7 +49,8 @@ function ProductDetailview() {
           </div>
         </div>
         <button>
-          <i className="fa-regular fa-heart"></i> <small>{data?.likes_number}</small>
+          <i className="fa-regular fa-heart"></i>{" "}
+          <small>{data?.likes_number}</small>
         </button>
       </div>
 
