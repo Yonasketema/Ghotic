@@ -21,14 +21,15 @@ type Product = {
   category: number;
   description: string;
   images: string;
-  likes: number;
+  likes: number[];
+  likes_number:number;
 };
 
 function ProductDetailview() {
   const { id } = useParams();
 
   const { isLoading, error, data } = useQuery<Product>(["product", id], () =>
-    axios.get(`${process.env.REACT_APP_PRODUCTS}/${id}`).then((res) => res.data)
+    axios.get(`${process.env.REACT_APP_PRODUCTS}${id}`).then((res) => res.data)
   );
 
   //////////////////// isLoading ....isError
@@ -48,7 +49,7 @@ function ProductDetailview() {
           </div>
         </div>
         <button>
-          <i className="fa-regular fa-heart"></i> <small>{data?.likes}</small>
+          <i className="fa-regular fa-heart"></i> <small>{data?.likes_number}</small>
         </button>
       </div>
 
