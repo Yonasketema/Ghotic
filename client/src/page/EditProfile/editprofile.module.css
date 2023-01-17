@@ -27,3 +27,8 @@
   width: 100%;
   gap: 1rem;
 }
+
+.image_input{
+  background-image: red;
+  padding: 1rem;
+}
