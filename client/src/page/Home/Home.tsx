@@ -6,12 +6,13 @@ import Card from "../../components/Card/Card";
 import SideBar from "../../components/Sidebar/SideBar";
 
 import { Product } from "../shared/types/Product";
+import productApi from "../../apis/productApi";
 
 const HomePage = (props: { token?: string }) => {
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery<Product[]>(["product"], () =>
-    axios.get(`${process.env.REACT_APP_PRODUCTS}`).then((res) => res.data)
+    productApi.getAllProduct().then((res) => res.data)
   );
 
   const handleLike = useMutation(
@@ -38,21 +39,21 @@ const HomePage = (props: { token?: string }) => {
           gap: "1rem",
         }}
       >
-        <SideBar />
+        {/*<SideBar />*/}
 
         <div
           style={{
             flex: "2",
           }}
         >
-          <Masonry columns={3} spacing={3}>
+          <Masonry columns={3} spacing={2}>
             {data?.map((product, i) => (
               <Card
                 key={product.id}
                 product={product}
                 onPressLove={handleLike}
               />
-            )) ?? <div>hello</div>}
+            )) ?? <></>}
           </Masonry>
         </div>
       </div>
