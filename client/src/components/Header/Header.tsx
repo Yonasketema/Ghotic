@@ -1,24 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Classes from "./header.module.css";
 import { Button, FlexBox } from "../lib";
-import styled from "styled-components";
-
-import { Link } from "react-router-dom";
-
-type User = {
-  id: number;
-  first_name?: string;
-  last_name?: string;
-  username?: string;
-  description?: string;
-  profile_pic?: string | null;
-};
+import { User } from "../../page/shared/types/User";
 
 type HeaderProp = {
   User: User;
 };
 
-function Header({ User }: HeaderProp) {
+const Header: React.FC<HeaderProp> = ({ User }) => {
   function logout() {
     window.localStorage.removeItem("Ghotic_token");
     window.location.assign("/");
@@ -73,6 +63,6 @@ function Header({ User }: HeaderProp) {
       </div>
     </header>
   );
-}
+};
 
 export default Header;
