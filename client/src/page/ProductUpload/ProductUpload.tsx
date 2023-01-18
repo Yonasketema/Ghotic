@@ -1,10 +1,13 @@
 import React from "react";
 import axios, { AxiosResponse } from "axios";
 import Classes from "./productUpload.module.css";
+import productApi from "../../apis/productApi";
+
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function ProductUpload(props: { token?: string }) {
-  console.log("++++", props.token);
-
   const [img, setImg] = React.useState("");
 
   function imageHandler(e: any): void {
@@ -18,7 +21,7 @@ function ProductUpload(props: { token?: string }) {
     reader.readAsDataURL(e.target.files[0]);
   }
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
 
     const { title, description, images } = event.target.elements;
@@ -31,22 +34,18 @@ function ProductUpload(props: { token?: string }) {
     formData.append("category", "1");
     formData.append("images", images.files[0]);
 
-    axios
-      .post(
-        `${process.env.REACT_APP_PRODUCTS}`,
-
-        formData,
-        {
-          headers: {
-            Authorization: `JWT ${props.token}`,
-          },
-        }
-      )
-      .then((res) => res.data);
+    try {
+      await productApi.createProduct(formData, props.token);
+    } catch (ex: any) {
+      if (ex.response && ex.response.status === 404) {
+        toast.error("post deleted ");
+      }
+    }
   }
 
   return (
     <div className={Classes.productupload_container}>
+      <ToastContainer />
       <form onSubmit={handleSubmit} style={{ width: "80%", margin: "0 auto" }}>
         <div className={Classes.upload_nav}>
           <button type="button" className={Classes.btn_cancel}>

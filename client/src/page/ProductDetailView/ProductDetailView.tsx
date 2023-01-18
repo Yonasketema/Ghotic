@@ -5,12 +5,14 @@ import { useParams } from "react-router-dom";
 import Classes from "./productdetail.module.css";
 import SelfCard from "./../../components/SelfCard/SelfCard";
 import { Product } from "../shared/types/Product";
+import productApi from "../../apis/productApi";
+
 
 function ProductDetailview() {
   const { id } = useParams();
 
   const { isLoading, error, data } = useQuery<Product>(["product", id], () =>
-    axios.get(`${process.env.REACT_APP_PRODUCTS}${id}`).then((res) => res.data)
+      productApi.getProduct(id).then((res) => res.data)
   );
 
   //////////////////// isLoading ....isError
@@ -54,10 +56,10 @@ function ProductDetailview() {
             width: "90vw",
           }}
         >
-          <SelfCard />
+       {/*   <SelfCard />
 
           <SelfCard />
-          <SelfCard />
+          <SelfCard />*/}
         </div>
       </section>
     </div>
