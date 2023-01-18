@@ -1,29 +1,10 @@
 import React from "react";
-import Classes from "./productdetail.module.css";
-import Profile from "./../../components/profile/Profile";
-import SelfCard from "./../../components/SelfCard/SelfCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-
 import { useParams } from "react-router-dom";
-
-type Product = {
-  id: number;
-  title: string;
-  artist: {
-    id: number;
-    first_name: string;
-    last_name: number;
-    username: string;
-    description: string;
-    profile_pic: string | null;
-  };
-  category: number;
-  description: string;
-  images: string;
-  likes: number[];
-  likes_number: number;
-};
+import Classes from "./productdetail.module.css";
+import SelfCard from "./../../components/SelfCard/SelfCard";
+import { Product } from "../shared/types/Product";
 
 function ProductDetailview() {
   const { id } = useParams();

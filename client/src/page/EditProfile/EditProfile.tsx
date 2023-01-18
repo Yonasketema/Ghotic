@@ -1,7 +1,7 @@
 import React from "react";
+import axios, { AxiosResponse } from "axios";
 import Classes from "./editprofile.module.css";
 import { Button, Input } from "../../components/lib";
-import axios, { AxiosResponse } from "axios";
 
 function EditProfile(props: { token?: string }) {
   function handleProfile(event: any) {
