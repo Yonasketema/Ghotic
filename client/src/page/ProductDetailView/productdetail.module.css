@@ -62,7 +62,8 @@
 .product_image {
   width: 70%;
   border-radius: 5px;
-  /*   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
+  height: 41rem;
+  object-fit: contain;
 
   margin-bottom: 3rem;
 }
