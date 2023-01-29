@@ -10,7 +10,7 @@ interface cardProp {
 }
 
 const Card: React.FC<cardProp> = ({
-  product: { id, images, title, likes_number, artist },
+  product: { id, images, title, likes_number, artist ,likes},
   onPressLove,
 }) => {
   return (
@@ -29,7 +29,7 @@ const Card: React.FC<cardProp> = ({
                 aria-hidden="true"
                 onClick={() => onPressLove.mutate({ product_id: id })}
                 style={{
-                  color: onPressLove.likes?.includes(1) ? "#fb3958" : "#9999",
+                  color: likes?.includes(1) ? "#fb3958" : "#9999",
                 }}
               ></i>
             </Link>
