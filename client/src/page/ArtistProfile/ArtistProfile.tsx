@@ -6,16 +6,14 @@ import Classes from "./artistProfile.module.css";
 import SelfCard from "./../../components/SelfCard/SelfCard";
 import Profile from "../../components/Profile/Profile";
 import { Product } from "../shared/types/Product";
+import userAPI from "../../apis/userAPI";
 
 function ArtistProfile() {
   const { artist_username } = useParams();
 
   const { isLoading, error, data } = useQuery<Product[]>(
     ["artist", artist_username],
-    () =>
-      axios
-        .get(`http://127.0.0.1:8001/gallery/artist/${artist_username}`)
-        .then((res) => res.data)
+    () => userAPI.getArtistProfile(artist_username).then((res) => res.data)
   );
 
   return (
