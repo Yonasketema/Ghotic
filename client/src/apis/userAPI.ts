@@ -1,10 +1,17 @@
 import { apiClient } from "./config/axiosConfig";
 
 const artistProfileUrl = "/gallery/artist/";
-const getUserUrl = "/gallery/artists/me/";
+const userArtistUrl = "/gallery/artists/me/";
 
-const UserArtistProfile = (token?: string) => {
-  return apiClient.get(getUserUrl, {
+type ProfileData = {
+  first_name: string;
+  last_name: string;
+  username: string;
+  description: string;
+};
+
+const userArtistProfile = (token?: string) => {
+  return apiClient.get(userArtistUrl, {
     headers: {
       Authorization: `JWT ${token}`,
     },
@@ -15,7 +22,24 @@ const getArtistProfile = (artist_username?: string) => {
   return apiClient.get(`${artistProfileUrl}${artist_username}`);
 };
 
+const editArtistProfile = (data: ProfileData, token?: string) => {
+  console.log("data", data);
+
+  return apiClient.put(
+    userArtistUrl,
+    {
+      ...data,
+    },
+    {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    }
+  );
+};
+
 export default {
-  UserArtistProfile,
+  userArtistProfile,
   getArtistProfile,
+  editArtistProfile,
 };
