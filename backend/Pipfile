@@ -10,6 +10,7 @@ pillow = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
+python-decouple = "*"
 
 [dev-packages]
 
