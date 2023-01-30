@@ -3,28 +3,26 @@ import axios, { AxiosResponse } from "axios";
 import Classes from "./editprofile.module.css";
 import { Button, Input } from "../../components/lib";
 
+import { useQuery } from "@tanstack/react-query";
+import userAPI from "../../apis/userAPI";
+
 function EditProfile(props: { token?: string }) {
+  const { data } = useQuery(["user"]);
+
   function handleProfile(event: any) {
     event.preventDefault();
     const { first_name, last_name, username, description } =
       event.target.elements;
 
-    console.log(first_name.value, username.value);
-
-    axios
-      .put(
-        `${process.env.REACT_APP_ME}`,
+    userAPI
+      .editArtistProfile(
         {
           first_name: first_name.value,
           last_name: last_name.value,
           username: username.value,
           description: description.value,
         },
-        {
-          headers: {
-            Authorization: `JWT ${props.token}`,
-          },
-        }
+        props.token
       )
       .then((res: AxiosResponse) => {
         console.log("**", res.data);
@@ -104,7 +102,7 @@ function EditProfile(props: { token?: string }) {
 
       <form onSubmit={handleProfile}>
         <label>Username</label>
-        <Input id="username" />
+        <Input id="username" placeholder="username" />
         {/* <p>Your Ghotic URL: https://Ghotic.com/yonask</p> */}
 
         <div className={Classes.box_container}>
