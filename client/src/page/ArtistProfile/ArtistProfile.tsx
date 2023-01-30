@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
 import Classes from "./artistProfile.module.css";
 import SelfCard from "./../../components/SelfCard/SelfCard";
 import Profile from "../../components/Profile/Profile";

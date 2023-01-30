@@ -7,8 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import userAPI from "../../apis/userAPI";
 
 function EditProfile(props: { token?: string }) {
-  const { data } = useQuery(["user"]);
-
   function handleProfile(event: any) {
     event.preventDefault();
     const { first_name, last_name, username, description } =
