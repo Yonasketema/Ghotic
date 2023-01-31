@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'corsheaders',
-    'user.apps.UserConfig',
+    'users.apps.UsersConfig',
     'gallery.apps.GalleryConfig',
     
 ]
@@ -124,7 +124,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
@@ -142,8 +142,8 @@ SIMPLE_JWT = {
 
 DJOSER = {
     "SERIALIZERS": {
-        'user_create': 'user.serializer.UserCreateSerializer',
-        # 'current_user': 'core.serializer.UserSerializer'
+        'user_create': 'users.serializer.UserCreateSerializer',
+        # 'current_user': 'users.serializer.UserSerializer'
 
     }
 }
