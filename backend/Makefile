@@ -1,2 +1,2 @@
 server:
-	python manage.py makemigrations && python manage.py migrate && python manage.py runserver
+	python ghotic/manage.py makemigrations && python ghotic/manage.py migrate && python ghotic/manage.py runserver
