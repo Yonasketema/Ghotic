@@ -7,6 +7,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 
 import { Product } from "../shared/types/Product";
 import productApi from "../../apis/productApi";
+import Classes from "./home.module.css";
 
 const HomePage = (props: { token?: string }) => {
   const queryClient = useQueryClient();
@@ -31,21 +32,10 @@ const HomePage = (props: { token?: string }) => {
 
   return (
     <>
-      <div
-        className="App"
-        style={{
-          display: "flex",
-          padding: "1rem",
-          gap: "1rem",
-        }}
-      >
-        {/*<SideBar />*/}
+      <div className={Classes.home_container}>
+        <SideBar />
 
-        <div
-          style={{
-            flex: "2",
-          }}
-        >
+        <div className={Classes.home_masonry}>
           <Masonry columns={3} spacing={2}>
             {data?.map((product, i) => (
               <Card

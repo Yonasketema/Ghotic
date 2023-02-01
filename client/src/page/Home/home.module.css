@@ -1,0 +1,9 @@
+.home_container {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  text-align: center;
+}
+.home_masonry {
+  flex: 2;
+}
