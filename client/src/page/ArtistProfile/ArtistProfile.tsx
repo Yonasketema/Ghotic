@@ -32,16 +32,7 @@ function ArtistProfile() {
           </ul>
         </div>
 
-        <div
-          style={{
-            display: "Grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gridAutoFlow: "dense",
-            justifyContent: "space-between",
-            width: "100%",
-            gap: "1rem",
-          }}
-        >
+        <div className={Classes.artistworks_contanier}>
           {data?.map((product, i) => (
             <SelfCard
               key={product.id}

@@ -2,6 +2,14 @@
   padding: 4.7rem;
 }
 
+.artistworks_contanier {
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-between;
+  grid-auto-flow: dense;
+}
 .profile_subnav {
   padding: 1.7rem 0;
   margin-bottom: 4rem;
