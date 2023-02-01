@@ -55,3 +55,9 @@ img {
   height: 1.7rem;
   border-radius: 50%;
 }
+
+.likes_number {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-left: 0.3rem;
+}

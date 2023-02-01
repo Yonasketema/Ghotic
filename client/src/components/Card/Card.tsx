@@ -10,7 +10,7 @@ interface cardProp {
 }
 
 const Card: React.FC<cardProp> = ({
-  product: { id, images, title, likes_number, artist ,likes},
+  product: { id, images, title, likes_number, artist, likes },
   onPressLove,
 }) => {
   return (
@@ -33,15 +33,7 @@ const Card: React.FC<cardProp> = ({
                 }}
               ></i>
             </Link>
-            <small
-              style={{
-                fontSize: ".9rem",
-                fontWeight: "500",
-                marginLeft: ".3rem",
-              }}
-            >
-              {likes_number}
-            </small>
+            <small className={Classes.likes_number}>{likes_number}</small>
           </div>
         </div>
 
