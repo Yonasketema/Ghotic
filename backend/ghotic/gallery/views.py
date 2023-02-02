@@ -1,5 +1,3 @@
-
-from pprint import pprint
 from django.shortcuts import render, get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet, ModelViewSet
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
@@ -10,9 +8,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
-
-# Create your views here.
 
 
 class ProductViewSet(ModelViewSet):
