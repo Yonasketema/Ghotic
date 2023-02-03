@@ -1,6 +1,7 @@
-from django.db import models
 from artists.models import Artist
-# from users.models import User
+from django.db import models
+
+
 class ProductCategory(models.Model):
     title = models.CharField(max_length=255)
 
@@ -10,7 +11,7 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE,related_name="productbyartist")
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name="productbyartist")
     category = models.ForeignKey(
         ProductCategory, on_delete=models.PROTECT)
     description = models.TextField()
