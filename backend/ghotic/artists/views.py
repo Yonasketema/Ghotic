@@ -1,3 +1,62 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet, ModelViewSet
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework import status
+
+from .models import Artist
+from .serializer import ArtistSerializer
+from products.models import Product
+from products.serializer import ProductSerializer
+
+
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view, action, permission_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+
+class ArtistViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, GenericViewSet):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.id, 'request': self.request}
+
+    @action(detail=False, methods=['GET', 'PUT'])
+    def me(self, request):
+
+        (artist, created) = Artist.objects.get_or_create(user_id=request.user.id)
+
+        if request.method == 'GET':
+            serializer = ArtistSerializer(artist, context={'request': request})
+            return Response(serializer.data)
+        elif request.method == 'PUT':
+            serializer = ArtistSerializer(
+                artist, data=request.data, context={'request': request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+
+
+@api_view()
+def artist(request, artist_name):
+    product = Product.objects.filter(artist__username=artist_name)
+    if not product:
+        return Response("no artist with is name", status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(product, many=True, context={'request': request})
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_likes_products(request):
+    user_artist_account = get_object_or_404(Artist,
+                                            user_id=request.user.id)
+    queryset = user_artist_account.product_like.all()
+    serializer = ProductSerializer(queryset, many=True)
+
+    return Response(serializer.data)
+
