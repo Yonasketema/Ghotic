@@ -1,9 +1,10 @@
+from artists.models import Artist
+from artists.serializer import ArtistSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
-from artists.serializer import ArtistSerializer
-from artists.models import Artist
 from .models import Product, ProductCategory
+
 
 class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
