@@ -35,8 +35,10 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'users.apps.UsersConfig',
-    'gallery.apps.GalleryConfig',
-    
+    'artists.apps.ArtistsConfig',
+    'products.apps.ProductsConfig',
+    # 'gallery.apps.GalleryConfig',
+
 ]
 
 MIDDLEWARE = [
