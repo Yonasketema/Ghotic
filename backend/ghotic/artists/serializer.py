@@ -1,8 +1,7 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from rest_framework.response import Response
 
 from .models import Artist
+
 
 class ArtistSerializer(serializers.ModelSerializer):
     artist_works = serializers.SerializerMethodField(method_name='works')
@@ -22,4 +21,3 @@ class ArtistSerializer(serializers.ModelSerializer):
         model = Artist
         fields = ['id', 'first_name', 'last_name', 'username',
                   'description', 'profile_pic', 'artist_works', 'user_email']
-
