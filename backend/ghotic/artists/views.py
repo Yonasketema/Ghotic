@@ -1,20 +1,15 @@
-from django.shortcuts import render
-
-from django.shortcuts import render, get_object_or_404
-from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet, ModelViewSet
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
+from django.shortcuts import get_object_or_404
+from products.models import Product
+from products.serializer import ProductSerializer
 from rest_framework import status
+from rest_framework.decorators import api_view, action, permission_classes
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from .models import Artist
 from .serializer import ArtistSerializer
-from products.models import Product
-from products.serializer import ProductSerializer
-
-
-
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, action, permission_classes
-from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 class ArtistViewSet(CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, GenericViewSet):
@@ -50,13 +45,15 @@ def artist(request, artist_name):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
-def user_likes_products(request):
+def profile_pic(request):
     user_artist_account = get_object_or_404(Artist,
                                             user_id=request.user.id)
-    queryset = user_artist_account.product_like.all()
-    serializer = ProductSerializer(queryset, many=True)
+
+    user_artist_account.profile_pic = request.data["profile_pic"]
+    user_artist_account.save()
+
+    serializer = ArtistSerializer(user_artist_account, context={'request': request})
 
     return Response(serializer.data)
-
