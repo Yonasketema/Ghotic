@@ -6,8 +6,16 @@ const getAllProduct = () => {
   return apiClient.get(productUrl);
 };
 
-const getProduct = (id: string | undefined) => {
+const getProduct = (id?: string) => {
   return apiClient.get(`${productUrl}${id}`);
+};
+
+const likeProduct = (product_id: any, token?: string) => {
+  return apiClient.post('/products/like', product_id, {
+    headers: {
+      Authorization: `JWT ${token}`,
+    },
+  });
 };
 
 const createProduct = (formData: any, token: string | undefined) => {
@@ -22,4 +30,5 @@ export default {
   getAllProduct,
   getProduct,
   createProduct,
+  likeProduct,
 };
