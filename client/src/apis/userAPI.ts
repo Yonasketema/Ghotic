@@ -1,7 +1,7 @@
 import { apiClient } from "./config/axiosConfig";
 
-const artistProfileUrl = "/gallery/artist/";
-const userArtistUrl = "/gallery/artists/me/";
+const artistProfileUrl = "/artists/go/";
+const userArtistUrl = "/artists/me/";
 
 type ProfileData = {
   first_name: string;

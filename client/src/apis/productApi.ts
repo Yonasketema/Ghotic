@@ -1,6 +1,6 @@
 import { apiClient } from "./config/axiosConfig";
 
-const productUrl = "/gallery/products/";
+const productUrl = "/products/";
 
 const getAllProduct = () => {
   return apiClient.get(productUrl);
