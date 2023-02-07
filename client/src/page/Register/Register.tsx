@@ -2,85 +2,70 @@ import React from "react";
 import Classes from "./register.module.css";
 import axios, { AxiosResponse } from "axios";
 
-interface UserNameError {
-  password?: string[] | null;
-  username?: {
-    username?: string[];
-    email?: string[];
-  };
-  email?: string[];
-}
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 function Register() {
-  const [usernameError, setUsernameError] = React.useState<UserNameError>({});
-
-  function handleSubmit(event: any) {
-    event.preventDefault();
-    const { email, username, password, password_confirm } =
-      event.target.elements;
-
-    axios
-      .post(`${process.env.REACT_APP_REGISTER}`, {
-        email: email.value,
-        username: username.value,
-        password: password.value,
-        password_confirm: password_confirm.value,
-      })
-      .then((res: AxiosResponse) => console.log("**", res.data))
-      .catch((error) => {
-        console.error("XX", error.response.data);
-        const errors: UserNameError = error.response.data;
-        if (errors.password) {
-          setUsernameError({ password: errors.password });
-        } else if (errors.username) {
-          setUsernameError({ username: errors.username });
-        }
-        if (errors.email) {
-          setUsernameError({ email: errors.email });
-        }
-      });
-  }
-
-  console.log("++++", usernameError);
   return (
-    <div className={Classes.login_container}>
-      <div className={Classes.form_container}>
-        <img
-          alt="a"
-          src="https://images.unsplash.com/photo-1670366732948-00c4469673c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-        />
-        <form onSubmit={handleSubmit}>
-          <h3>Register</h3>
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+        password_confirm: "",
+      }}
+      validationSchema={Yup.object({
+        password: Yup.string()
+          .required("Required")
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+          ),
+        password_confirm: Yup.string().oneOf(
+          [Yup.ref("password"), null],
+          "Passwords must match"
+        ),
+        email: Yup.string().email("Invalid email address").required("Required"),
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+        axios
+          .post(`${process.env.REACT_APP_REGISTER}`, {
+            email: values.email,
+            password: values.password,
+            password_confirm: values.password_confirm,
+          })
+          .then((res: AxiosResponse) => console.log("**", res.data))
+          .catch((error) => {
+            console.error("XX", error.response.data);
+          });
+      }}
+    >
+      <div className={Classes.register_container}>
+        <div className={Classes.form_container}>
+          <img
+            alt="a"
+            src="https://images.unsplash.com/photo-1670366732948-00c4469673c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+          />
+          <Form>
+            <h3>Register</h3>
 
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" />
+            <label htmlFor="email">Email</label>
+            <Field name="email" type="text" id="email" />
+            <ErrorMessage name="email"   />
 
-          <label
-            htmlFor="password"
-            onChange={() => setUsernameError({ password: null })}
-          >
-            Password
-          </label>
-          <input type="text" id="password" />
+            <label htmlFor="password">Password</label>
+            <Field name="password" type="text" id="password" />
+            <ErrorMessage name="password" />
 
-          <label htmlFor="username">username</label>
-          <input type="text" id="username" />
+            <label htmlFor="password_confirm">password Confirm</label>
+            <Field name="password_confirm" type="text" id="password_confirm" />
+            <ErrorMessage name="password_confirm" />
 
-          <label
-            htmlFor="password_confirm"
-            onChange={() => setUsernameError({ password: undefined })}
-          >
-            password Confirm
-          </label>
-          {usernameError.password?.map((error) => (
-            <small>{error}</small>
-          ))}
-          <input type="text" id="password_confirm" />
-
-          <button className={Classes.login_btn}>Register</button>
-        </form>
+            <button className={Classes.login_btn}>Register</button>
+          </Form>
+        </div>
       </div>
-    </div>
+    </Formik>
   );
 }
 

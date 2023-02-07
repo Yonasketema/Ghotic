@@ -30,7 +30,6 @@ function ProductUpload(props: { token?: string }) {
 
     formData.append("title", title.value);
     formData.append("description", `${description.value}`);
-
     formData.append("category", "1");
     formData.append("images", images.files[0]);
 
