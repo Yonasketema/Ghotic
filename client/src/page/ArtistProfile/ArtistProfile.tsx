@@ -7,9 +7,12 @@ import SelfCard from "./../../components/SelfCard/SelfCard";
 import Profile from "../../components/Profile/Profile";
 import { Product } from "../shared/types/Product";
 import userAPI from "../../apis/userAPI";
+import useHandleLike from "../../hooks/handleLike";
 
-function ArtistProfile() {
+function ArtistProfile(props: { token?: string }) {
   const { artist_username } = useParams();
+
+  const handleLike = useHandleLike(props.token,artist_username);
 
   const { isLoading, error, data } = useQuery<Product[]>(
     ["artist", artist_username],
@@ -36,10 +39,11 @@ function ArtistProfile() {
           {data?.map((product, i) => (
             <SelfCard
               key={product.id}
-              // onPressLove={handleLike}
+              onPressLove={handleLike}
               id={product.id}
               title={product.title}
               images={product.images}
+              likes={product.likes}
             />
           ))}
         </div>
