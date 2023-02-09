@@ -32,3 +32,14 @@
   background-image: red;
   padding: 1rem;
 }
+
+.editprofile_form{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.profile_url{
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 300;
+}
