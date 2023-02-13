@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 
 function EditProfile(props: { token?: string }) {
-  const { data } = useQuery(["user"]);
+  const { data } = useQuery(["user"]); 
 
   const [username, setUserName] = React.useState(data.username);
 
