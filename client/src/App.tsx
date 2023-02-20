@@ -12,6 +12,7 @@ import ProductUpload from "./page/ProductUpload/ProductUpload";
 import Header from "./components/Header/Header";
 import UserAPI from "./apis/userAPI";
 import "./App.css";
+import useUser from "./hooks/user";
 
 type token = {
   access?: string;
@@ -29,14 +30,7 @@ function App() {
     jwttokens = JSON.parse(localToken);
   }
 
-  const { isLoading, error, data } = useQuery(
-    ["user"],
-    () => UserAPI.userArtistProfile(jwttokens.access).then((res) => res.data),
-    {
-      refetchOnWindowFocus: false,
-      retry: 1,
-    }
-  );
+  const { isLoading, error, data } = useUser(jwttokens.access);
 
   return isLoading ? (
     <div>Loading...</div>
@@ -44,8 +38,11 @@ function App() {
     <>
       <Header User={data} />
       <Routes>
-        <Route path="/" element={<Home token={jwttokens.access} />} />
-        <Route path="/:artist_username" element={<ArtistProfile />} />
+        <Route path="/" element={<Home token={jwttokens.access} userId={data?.id} />} />
+        <Route
+          path="/:artist_username"
+          element={<ArtistProfile token={jwttokens.access} />}
+        />
         <Route
           path="/upload"
           element={<ProductUpload token={jwttokens.access} />}
