@@ -5,17 +5,23 @@ import { useQuery } from "@tanstack/react-query";
 import Classes from "./card.module.css";
 import { Product } from "../../page/shared/types/Product";
 import { User } from "../../page/shared/types/User";
+import useUser from "../../hooks/user";
 
 interface cardProp {
   product: Product;
   onPressLove: any;
+  token?:string;
+  userId:number;
 }
 
 const Card: React.FC<cardProp> = ({
   product: { id, images, title, likes_number, artist, likes },
   onPressLove,
+  userId,
 }) => {
-  const { data } = useQuery<User>(["user"]);
+  
+
+   
 
   return (
     <Link to={`/productdetailview/${id}`}>
@@ -33,7 +39,7 @@ const Card: React.FC<cardProp> = ({
                 aria-hidden="true"
                 onClick={() => onPressLove.mutate({ product_id: id })}
                 style={{
-                  color: likes?.includes(data ? data.id : 0)
+                  color: likes?.includes(userId)
                     ? "#fb3958"
                     : "#9999",
                 }}
